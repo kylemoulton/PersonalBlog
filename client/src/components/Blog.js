@@ -10,12 +10,18 @@ class Blog extends Component {
     }
 
     renderPosts() {
-        return _.map(this.props.blogs, blog => {
-            return <BlogPostCard
-                key={blog._id}
-                blog={ blog }
-            />;
-        });
+        if (this.props.blogs) {
+            return _.map(this.props.blogs, blog => {
+                return <BlogPostCard
+                    key={blog._id}
+                    blog={ blog }
+                />;
+            });
+        }
+        else {
+            return <p>'Loading...'</p>;
+        }
+
     }
 
     render() {
@@ -24,7 +30,7 @@ class Blog extends Component {
                 <h1 style={{ textAlign: 'center' }}>
                     Blog
                 </h1>
-                {this.props.blog ? <p>Loading...</p> : this.renderPosts()}
+                {this.renderPosts()}
             </div>
         );
     }

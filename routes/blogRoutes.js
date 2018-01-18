@@ -18,6 +18,29 @@ module.exports = app => {
         await post.save();
     });
 
+    app.get('/api/blog_posts/:id', async (req, res) => {
+        const post = await BlogPost.findOne({_id: req.params.id});
+        res.send(post);
+    });
+
+    app.put('/api/blog_posts/:id', async (req, res) => {
+        await BlogPost.updateOne(
+            {
+                _id: req.params.id
+            },
+            {
+                $set: {
+                    title: req.body.title,
+                    content: req.body.content,
+                    lastUpdated: Date.now()
+                }
+            }
+        );
+
+        const blogs = await BlogPost.find({});
+        res.send(blogs);
+    });
+
     app.delete('/api/blog_posts/:id', requireLogin, isAdmin, async (req, res) => {
         await BlogPost.remove({ _id: req.params.id });
         const blogs = await BlogPost.find({});
@@ -55,7 +78,5 @@ module.exports = app => {
         const blogs = await BlogPost.find({});
         res.send(blogs);
     });
-
-
 }
 

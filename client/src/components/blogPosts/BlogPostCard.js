@@ -21,7 +21,8 @@ class BlogPostCard extends Component {
         this.props.deletePost(this.props.blog._id);
         this.setState({
             cardStyle: {
-                opacity: 0.5 
+                opacity: 0.5,
+                margin: '0px 10px 0px 10px'
             }
         });
     }
@@ -34,10 +35,16 @@ class BlogPostCard extends Component {
         this.setState({showComments: !this.state.showComments});
     }
 
-    renderDeleteButton() {
+    renderAdminButtons() {
         return (
             <div style={{textAlign: 'right'}} className="card-action">
-                <button onClick={() => this.handleDelete()} className="red darken-3 white-text btn-flat">
+                <Link  
+                    to={'/blog/' + this.props.blog._id + '/edit'}
+                    className="orange darken-2 white-text btn-flat"
+                >
+                    Edit Post
+                </Link>
+                <button style={{marginLeft: '10px'}} onClick={() => this.handleDelete()} className="red darken-3 white-text btn-flat">
                     Delete Post
                 </button>
             </div>
@@ -67,7 +74,7 @@ class BlogPostCard extends Component {
                             <span className="right">Posted: {new Date(blog.date).toLocaleDateString()}</span>
                         </div>
                         {this.state.showComments ? <BlogComments blog={this.props.blog} /> : null}
-                        {(auth && auth.access === 'admin') ? this.renderDeleteButton() : null}
+                        {(auth && auth.access === 'admin') ? this.renderAdminButtons() : null}
                     </div>
                 </div>
             </div>

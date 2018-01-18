@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_POSTS, FETCH_USER } from './types';
+import { FETCH_POSTS, FETCH_USER, FETCH_POST } from './types';
 
 export const fetchPosts = () => async dispatch => {
     const res = await axios.get('/api/blog_posts');
@@ -14,6 +14,16 @@ export const fetchUser = () => async dispatch => {
 export const createPost = (values, history) => async dispatch => {
     const res = await axios.post('api/blog_posts', values); 
     dispatch({ type: FETCH_POSTS, payload: res.data });
+}
+
+export const fetchPost = (blogId) => async dispatch => {
+    const res = await axios.get('/api/blog_posts/' + blogId);
+    dispatch({ type: FETCH_POST, payload: res.data });
+}
+
+export const updatePost = (blogId, values) => async dispatch => {
+    const res = await axios.put('/api/blog_posts/' + blogId, values);
+    dispatch({ type: FETCH_POSTS, payload: res.data});
 }
 
 export const deletePost = (blogId) => async dispatch => {

@@ -9,6 +9,7 @@ import AboutMe from './AboutMe';
 import Projects from './Projects';
 import AdminDashboard from './AdminDashboard';
 import BlogPost from './blogPosts/BlogPost';
+import EditBlogPost from './blogPosts/EditBlogPost';
 
 class App extends Component {
     componentDidMount() {
@@ -24,7 +25,8 @@ class App extends Component {
                         <Route exact path="/" component={Landing} />
                         <Route path="/about" component={AboutMe} />
                         <Route exact path="/blog" component={Blog} />
-                        <Route path="/blog/:id" component={BlogPost} />
+                        <Route exact path="/blog/:id" component={BlogPost} />
+                        <Route path="/blog/:id/edit" component={EditBlogPost} />
                         <Route path="/projects" component={Projects} />
                         <Route path="/admin" component={AdminDashboard} />
                     </div>
