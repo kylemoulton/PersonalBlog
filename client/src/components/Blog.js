@@ -19,7 +19,7 @@ class Blog extends Component {
             });
         }
         else {
-            return <p>'Loading...'</p>;
+            return <p>Loading...</p>;
         }
 
     }

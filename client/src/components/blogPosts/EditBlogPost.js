@@ -23,7 +23,7 @@ class EditBlogPost extends Component {
 
     render() {
         return (
-            <div className="container" style={{marginTop: "50px"}}>
+            <div className="container" style={{marginTop: "30px"}}>
                 <form onSubmit={this.props.handleSubmit(() => this.onUpdateSubmit())}>
                     <Field
                         label="Blog Title"
@@ -35,7 +35,7 @@ class EditBlogPost extends Component {
                         label="Blog Content"
                         name="content"
                         component={PostFieldTextArea}
-                        type="textarea"
+                        type="text"
                     />
                     <Link to="/blog" className="red btn-flat left white-text">
                         Cancel
@@ -71,7 +71,6 @@ function mapStateToProps(state) {
 
 export default reduxForm({
         validate,
-        form: 'updateForm',
-        destroyOnUnmount: false
+        form: 'updateForm'
 })(connect(mapStateToProps, { fetchPost, updatePost })(EditBlogPost));
 

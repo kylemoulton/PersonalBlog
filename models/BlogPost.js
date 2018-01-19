@@ -6,6 +6,7 @@ const blogPostSchema = new Schema({
     title: String,
     content: String,
     date: Date,
+    lastUpdated: { type: Date, default: null },
     comments: [BlogComment]
 });
 

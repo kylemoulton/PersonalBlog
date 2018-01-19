@@ -1,13 +1,42 @@
-import React from 'react';
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ProjectCard from './projects/ProjectCard';
+import { fetchProjects } from '../actions';
 
-const Projects = () => {
-    return (
-        <div style={{ textAlign: 'center' }}>
-            <h1>
-                Projects
-            </h1>
-        </div>
-    );
+class Projects extends Component {
+    componentDidMount() {
+        this.props.fetchProjects();
+    }
+
+    renderProjects() {
+        if (this.props.projects) {
+            return _.map(this.props.projects, project => {
+                return <ProjectCard
+                    key={project._id}
+                    project={project}
+                />;
+            });
+        }
+        else {
+            return <p>Loading...</p>;
+        }
+    }
+
+    render() {
+        return(
+            <div>
+                <h1 style={{ textAlign: 'center' }}>
+                    Projects
+                </h1>
+                {this.renderProjects()}
+            </div>
+        );
+    }
 }
 
-export default Projects;
+function mapStateToProps({ projects }) {
+    return { projects };
+}
+
+export default connect(mapStateToProps, { fetchProjects })(Projects);

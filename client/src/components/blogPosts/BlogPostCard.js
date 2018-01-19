@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as actions from '../../actions';
-import BlogComments from './BlogComments';
+import BlogComments from './comments/BlogComments';
 
 class BlogPostCard extends Component {
     constructor(props) {
@@ -53,7 +53,7 @@ class BlogPostCard extends Component {
 
     render() {
         const { blog, auth } = this.props;
-        let blogContent = this.state.expanded ? blog.content : blog.content.substring(0, Math.min(blog.content.length / 2, 10)) + '...';
+        let blogContent = this.state.expanded ? blog.content : blog.content.substring(0, Math.min(blog.content.length / 2, 175)) + '...';
         let showContentMessage = this.state.expanded ? 'Show Less' : 'Show More';
         let showCommentMessage = this.state.showComments ? 'Hide Comments' : 'Show Comments';
         return (
@@ -61,17 +61,14 @@ class BlogPostCard extends Component {
                 <div className="col s12 m12">
                     <div className="card cyan darken-3 white-text">
                         <div className="card-content">
-                            <Link
-                                to={'/blog/' + blog._id}
-                            >
                             <span className="card-title white-text">{blog.title}</span>
-                            </Link>
                             <p>{blogContent}</p>
                         </div>
-                        <div className="card-action">
+                        <div className="card-action" style={{paddingBottom: '20px'}}>
                             <a className="amber-text text-darken-2" onClick={() => this.handleExpand()}>{showContentMessage}</a>
                             <a className="amber-text text-darken-2" onClick={() => this.handleShowComments()}>{showCommentMessage}: {blog.comments.length}</a>                        
-                            <span className="right">Posted: {new Date(blog.date).toLocaleDateString()}</span>
+                            <span style={{marginLeft: '15px'}} className="right">Posted: {new Date(blog.date).toLocaleDateString()}</span>
+                            {blog.lastUpdated ? <span className="right grey-text text-lighten-1">Last Edited: {new Date(blog.lastUpdated).toLocaleDateString()}</span> : null}
                         </div>
                         {this.state.showComments ? <BlogComments blog={this.props.blog} /> : null}
                         {(auth && auth.access === 'admin') ? this.renderAdminButtons() : null}

@@ -10,7 +10,7 @@ const PostFormReview = ({ onCancel, formValues, createPost, history}) => {
     } 
 
     return (
-        <div>
+        <div className="container" style={{marginTop: "50px"}}>
             <h5>Confirm your Blog Post</h5>
             <div>
                 <label>Title</label>
@@ -18,7 +18,7 @@ const PostFormReview = ({ onCancel, formValues, createPost, history}) => {
                     {formValues.title}
                 </div>
             </div>
-            <div>
+            <div style={{marginBottom: "20px"}}>
                 <label>Content</label>
                 <div>
                     {formValues.content}
