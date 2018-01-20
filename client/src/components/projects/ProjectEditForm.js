@@ -6,14 +6,7 @@ import { fetchProject, updateProject } from '../../actions';
 import InputFormField from '../common/InputFormField';
 import TextAreaFormField from '../common/TextAreaFormField';
 
-const notAuthorized = (
-    <div>
-        <p>You are not authorized to edit this project</p>
-        <p><a href="/auth/google">Login with Google</a></p>
-    </div>
-);
-
-class EditBlogPost extends Component {
+class ProjectEditForm extends Component {
     async componentDidMount() {
         await this.props.fetchProject(this.props.match.params.id);
 
@@ -30,7 +23,7 @@ class EditBlogPost extends Component {
         this.props.history.push('/projects');
     }
 
-    renderEditProjectForm() {
+    render() {
         return (
             <div className="container" style={{marginTop: "30px", marginBottom: '100px'}}>
                 <form onSubmit={this.props.handleSubmit(() => this.onUpdateSubmit())}>
@@ -68,24 +61,6 @@ class EditBlogPost extends Component {
             </div>
         );
     }
-
-    render() {
-        switch(this.props.auth) {    
-            case null:
-                return (
-                    <div>Loading</div>
-                );
-            case false:
-                return notAuthorized;
-            default:
-                if (this.props.auth.access) {
-                    if (this.props.auth.access === 'admin') {
-                        return this.renderEditProjectForm();
-                    }
-                }
-                return notAuthorized;
-        }
-    }
 }
 
 function validate(values) {
@@ -108,7 +83,6 @@ function validate(values) {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth,
         project: state.project,
         formValues: state.form.updateForm.values
     };
@@ -117,5 +91,4 @@ function mapStateToProps(state) {
 export default reduxForm({
         validate,
         form: 'updateForm'
-})(connect(mapStateToProps, { fetchProject, updateProject })(EditBlogPost));
-
+})(connect(mapStateToProps, { fetchProject, updateProject })(ProjectEditForm));

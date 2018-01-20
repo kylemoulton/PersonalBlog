@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import PostFieldInput from './PostFieldInput';
-import PostFieldTextArea from './PostFieldTextArea';
+import InputFormField from '../common/InputFormField';
+import TextAreaFormField from '../common/TextAreaFormField';
 
 class PostForm extends Component {
     render() {
@@ -12,13 +12,13 @@ class PostForm extends Component {
                     <Field
                         label="Blog Title"
                         name="title"
-                        component={PostFieldInput}
+                        component={InputFormField}
                         type="text"
                     />
                     <Field
                         label="Blog Content"
                         name="content"
-                        component={PostFieldTextArea}
+                        component={TextAreaFormField}
                         type="text"
                     />
                     <Link to="/blog" className="red btn-flat left white-text">

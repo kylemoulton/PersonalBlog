@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { fetchPost, updatePost } from '../../actions';
-import PostFieldInput from './PostFieldInput';
-import PostFieldTextArea from './PostFieldTextArea';
+import InputFormField from '../common/InputFormField';
+import TextAreaFormField from '../common/TextAreaFormField';
 
-class EditBlogPost extends Component {
+class PostEditForm extends Component {
     async componentDidMount() {
         await this.props.fetchPost(this.props.match.params.id);
 
@@ -28,13 +28,13 @@ class EditBlogPost extends Component {
                     <Field
                         label="Blog Title"
                         name="title"
-                        component={PostFieldInput}
+                        component={InputFormField}
                         type="text"
                     />
                     <Field
                         label="Blog Content"
                         name="content"
-                        component={PostFieldTextArea}
+                        component={TextAreaFormField}
                         type="text"
                     />
                     <Link to="/blog" className="red btn-flat left white-text">
@@ -63,7 +63,6 @@ function validate(values) {
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth,
         blogPost: state.blogPost,
         formValues: state.form.updateForm.values
     };
@@ -72,5 +71,5 @@ function mapStateToProps(state) {
 export default reduxForm({
         validate,
         form: 'updateForm'
-})(connect(mapStateToProps, { fetchPost, updatePost })(EditBlogPost));
+})(connect(mapStateToProps, { fetchPost, updatePost })(PostEditForm));
 

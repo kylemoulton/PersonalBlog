@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
-import CommentField from './CommentField';
+import InputFormField from '../../common/InputFormField';
 import * as actions from '../../../actions';
 
 class CommentForm extends Component {
@@ -17,14 +17,14 @@ class CommentForm extends Component {
                     key="username"
                     label="Username"
                     name="username"
-                    component={CommentField}
+                    component={InputFormField}
                     type="text"
                 />
                 <Field
                     key="content"
                     label="Comment"
                     name="content"
-                    component={CommentField}
+                    component={InputFormField}
                     type="text"
                 />
                 <button className="red darken-3 white-text btn-flat" onClick={this.props.onCancel}>

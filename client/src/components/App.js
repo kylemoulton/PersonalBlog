@@ -7,11 +7,14 @@ import Landing from './Landing';
 import Blog from './Blog';
 import AboutMe from './AboutMe';
 import Projects from './Projects';
-// Rename admindashboard and make a real dashboard? with add new post project links/buttons
+import authenticateUser from '../services/authenticateUser';
 import AdminDashboard from './AdminDashboard';
-import EditBlogPost from './blogPosts/EditBlogPost';
+import PostNew from './blogPosts/PostNew';
+import PostEditForm from './blogPosts/PostEditForm';
 import ProjectNew from './projects/ProjectNew';
-import EditProject from './projects/EditProject';
+import ProjectEditForm from './projects/ProjectEditForm';
+
+
 
 class App extends Component {
     componentDidMount() {
@@ -27,11 +30,12 @@ class App extends Component {
                         <Route exact path="/" component={Landing} />
                         <Route path="/about" component={AboutMe} />
                         <Route exact path="/blog" component={Blog} />
-                        <Route path="/admin" component={AdminDashboard} />
-                        <Route path="/blog/:id/edit" component={EditBlogPost} />
                         <Route exact path="/projects" component={Projects} />
-                        <Route exact path="/projectForm" component={ProjectNew} />
-                        <Route path="/projects/:id/edit" component={EditProject} />
+                        <Route path="/admin" component={authenticateUser(AdminDashboard)} />
+                        <Route exact path="/blog/new" component={authenticateUser(PostNew)} />
+                        <Route path="/blog/:id/edit" component={authenticateUser(PostEditForm)} />
+                        <Route exact path="/projects/new" component={authenticateUser(ProjectNew)} />
+                        <Route path="/projects/:id/edit" component={authenticateUser(ProjectEditForm)} />
                     </div>
                 </BrowserRouter>
             </div>
