@@ -23,7 +23,7 @@ module.exports = app => {
         res.send(post);
     });
 
-    app.put('/api/blog_posts/:id', async (req, res) => {
+    app.put('/api/blog_posts/:id', requireLogin, isAdmin, async (req, res) => {
         await BlogPost.updateOne(
             {
                 _id: req.params.id
@@ -62,7 +62,7 @@ module.exports = app => {
         res.send(blogs);
     });
 
-    app.delete('/api/blog_posts/:id/comments/:comment_id', async (req, res) => {
+    app.delete('/api/blog_posts/:id/comments/:comment_id', requireLogin, isAdmin, async (req, res) => {
         await BlogPost.updateOne(
             {
                 _id: req.params.id
@@ -78,5 +78,5 @@ module.exports = app => {
         const blogs = await BlogPost.find({});
         res.send(blogs);
     });
-}
+};
 

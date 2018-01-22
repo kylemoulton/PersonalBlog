@@ -27,7 +27,7 @@ module.exports = app => {
         res.send(project);
     });
 
-    app.put('/api/projects/:id', async (req, res) => {
+    app.put('/api/projects/:id', requireLogin, isAdmin, async (req, res) => {
         await BlogPost.updateOne(
             {
                 _id: req.params.id
@@ -51,5 +51,5 @@ module.exports = app => {
         const projects = await Project.find({});
         res.send(projects);    
     });
-}
+};
 

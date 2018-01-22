@@ -14,8 +14,6 @@ import PostEditForm from './blogPosts/PostEditForm';
 import ProjectNew from './projects/ProjectNew';
 import ProjectEditForm from './projects/ProjectEditForm';
 
-
-
 class App extends Component {
     componentDidMount() {
         this.props.fetchUser();

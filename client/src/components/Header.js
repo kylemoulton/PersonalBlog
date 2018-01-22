@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 class Header extends Component {
     render() {
@@ -10,6 +10,7 @@ class Header extends Component {
                     <Link
                         to='/'
                         className="left brand-logo"
+                        style={{marginLeft: '10px'}}
                     >
                     Kyle Moulton
                     </Link>
@@ -35,10 +36,7 @@ class Header extends Component {
                                 Projects
                             </Link>
                         </li>
-                        {/* <li>
-                            <a href='/auth/google'>Login with Google</a>
-                        </li>
-                        {this.props.auth.access === 'admin' ? (
+                        {this.props.auth && this.props.auth.access === 'admin' ? (
                             <li>
                                 <Link
                                     to='/admin'
@@ -51,7 +49,8 @@ class Header extends Component {
                             <li>
                                 <a href='/api/logout'>Logout</a>
                             </li>
-                        ) : null } */}
+                        ) : null
+                        }
                     </ul>
                 </div>
             </nav>
@@ -59,10 +58,8 @@ class Header extends Component {
     }
 }
 
-// function mapStateToProps({ auth }) {
-//     return { auth };
-// }
+function mapStateToProps({ auth }) {
+    return { auth };
+}
 
-// export default connect(mapStateToProps)(Header);
-
-export default Header;
+export default connect(mapStateToProps)(Header);
