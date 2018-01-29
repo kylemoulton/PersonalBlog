@@ -42,12 +42,23 @@ class ProjectCard extends Component {
             <div className="row" style={this.state.cardStyle}>
                 <div className="col s12 m12">
                     <div className="card cyan darken-3 white-text">
-                        <div className="card-content">
-                            <span className="card-title white-text">{this.props.project.title}</span>
-                            <p>{this.props.project.description}</p>
-                        </div>
-                        <div className="card-action">
-                            <a href={this.props.project.githubUrl} className="amber-text text-darken-2">View on Github</a>
+                        <div className="row">
+                            <div className="col s6 m6">
+                                <div className="card-content">
+                                    <span className="card-title white-text">{this.props.project.title}</span>
+                                </div>
+                                <div className="card-content">
+                                    <p>{this.props.project.description}</p>
+                                </div>
+                                <div className="card-action">
+                                    <a href={this.props.project.githubUrl} className="amber-text text-darken-2">View on Github</a>
+                                </div>
+                            </div>
+                            <div className="col s6 m6">
+                                <a href={this.props.project.imageUrl}>
+                                    <img style={{padding: '25px'}} className="responsive-img" src={this.props.project.imageUrl} />
+                                </a>
+                            </div>
                         </div>
                         {(this.props.auth && this.props.auth.access === 'admin') ? this.renderAdminButtons() : null}
                     </div>

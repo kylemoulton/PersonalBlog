@@ -5,55 +5,57 @@ import { connect } from 'react-redux';
 class Header extends Component {
     render() {
         return (
-            <nav>
-                <div className="nav-wrapper cyan darken-1 white-text">
-                    <Link
-                        to='/'
-                        className="left brand-logo"
-                        style={{marginLeft: '10px'}}
-                    >
-                    Kyle Moulton
-                    </Link>
-                    <ul className="right">
-                        <li>
-                            <Link
-                                to='/blog'
-                            >
-                                Blog
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to='/about'
-                            >
-                                About Me
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to='/projects'
-                            >
-                                Projects
-                            </Link>
-                        </li>
-                        {this.props.auth && this.props.auth.access === 'admin' ? (
+            <header>
+                <nav>
+                    <div className="nav-wrapper cyan darken-1 white-text">
+                        <Link
+                            to='/'
+                            className="left brand-logo"
+                            style={{marginLeft: '10px'}}
+                        >
+                        Kyle Moulton
+                        </Link>
+                        <ul className="right">
                             <li>
                                 <Link
-                                    to='/admin'
+                                    to='/blog'
                                 >
-                                    Admin Dashboard
+                                    Blog
                                 </Link>
                             </li>
-                        ) : null }
-                        {this.props.auth ? (
                             <li>
-                                <a href='/api/logout'>Logout</a>
+                                <Link
+                                    to='/about'
+                                >
+                                    About Me
+                                </Link>
                             </li>
-                        ) : null
-                        }
-                    </ul>
-                </div>
-            </nav>
+                            <li>
+                                <Link
+                                    to='/projects'
+                                >
+                                    Projects
+                                </Link>
+                            </li>
+                            {this.props.auth && this.props.auth.access === 'admin' ? (
+                                <li>
+                                    <Link
+                                        to='/admin'
+                                    >
+                                        Admin Dashboard
+                                    </Link>
+                                </li>
+                            ) : null }
+                            {this.props.auth ? (
+                                <li>
+                                    <a href='/api/logout'>Logout</a>
+                                </li>
+                            ) : null
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            </header>
         );   
     }
 }

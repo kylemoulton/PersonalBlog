@@ -23,12 +23,12 @@ module.exports = app => {
 
     app.get('/api/projects/:id', async (req, res) => {
         const project = await Project.findOne({_id: req.params.id});
-        console.log(project);
         res.send(project);
     });
 
     app.put('/api/projects/:id', requireLogin, isAdmin, async (req, res) => {
-        await BlogPost.updateOne(
+        console.log(req.body);
+        await Project.updateOne(
             {
                 _id: req.params.id
             },
